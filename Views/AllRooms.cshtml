@@ -1,0 +1,18 @@
+﻿@model List<Room>;
+
+<h2>All Rooms</h2>
+<div>
+    <ul>
+        @foreach(Room room in Model)
+        {
+            @if (!room.Occupied)
+            {
+                <li>Room @room.Number's Capacity: @room.Capacity - UNOCCUPIED</li>
+            }
+            else
+            {
+                <li>Room @room.Number - OCCUPIED : Has @room.CurrentOccupants current occupants.</li>
+            }
+        }
+    </ul>
+</div>
