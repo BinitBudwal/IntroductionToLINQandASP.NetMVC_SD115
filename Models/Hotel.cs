@@ -73,7 +73,7 @@
                 List<Room> vacantRoom = GetVacantRooms();
                 Room suitableRoom = vacantRoom.First(v => v.Capacity >= occupants);
                 Client myClient = GetClient(clientID);
-                Reservation newReservation = new Reservation(myClient, suitableRoom);
+                Reservation newReservation = new Reservation(suitableRoom,myClient);
                 suitableRoom.Reservations.Add(newReservation);
                 myClient.Reservations.Add(newReservation);
                 Reservations.Add(newReservation);
