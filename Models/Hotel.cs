@@ -73,7 +73,7 @@
                 List<Room> vacantRoom = GetVacantRooms();
                 Room suitableRoom = vacantRoom.First(v => v.Capacity >= occupants);
                 Client myClient = GetClient(clientID);
-                Reservation newReservation = new Reservation(myClient, suitableRoom);
+                Reservation newReservation = new Reservation(suitableRoom,myClient);
                 suitableRoom.Reservations.Add(newReservation);
                 myClient.Reservations.Add(newReservation);
                 Reservations.Add(newReservation);
@@ -93,7 +93,7 @@
 
         public static void Checkout(int roomNum)
         {
-            Reservation updateReservation = Reservations.First(r => r.Room.RoomNum.Equals(roomNum));
+            Reservation updateReservation = Reservations.First(r => r.Room.Equals(roomNum));
             updateReservation.Current = false;
         }
 
@@ -113,7 +113,7 @@
 
         public static int AverageOccupancyPercentage()
         {
-            List<Reservation> currentReservation = Reservations.Where(r => r.IsCurrent.Equals(true)).ToList();
+            List<Reservation> currentReservation = Reservations.Where(r => r.Current.Equals(true)).ToList();
             int totalOccupants = currentReservation.Sum(r => r.Occupants);
             int totalCapacity = currentReservation.Sum(r => r.Room.Capacity);
             int average = (totalOccupants / totalCapacity) * 100;
