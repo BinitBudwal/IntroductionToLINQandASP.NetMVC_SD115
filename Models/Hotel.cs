@@ -22,8 +22,8 @@
             Rooms.Add(room1);
             Rooms.Add(room2);
             Rooms.Add(room3);
-            Client client1 = new Client("Honey", 9898656545458787,"Regular");
-            Client client2 = new Client("Bunny", 9898232245696161,"Regular");
+            Client client1 = new Client("Honey", 9898656545458787, "Regular");
+            Client client2 = new Client("Bunny", 9898232245696161, "Regular");
             Client client3 = new Client("Money", 8084333312984577, "Premium");
 
             Clients.Add(client1);
@@ -73,7 +73,7 @@
                 List<Room> vacantRoom = GetVacantRooms();
                 Room suitableRoom = vacantRoom.First(v => v.Capacity >= occupants);
                 Client myClient = GetClient(clientID);
-                Reservation newReservation = new Reservation(suitableRoom,myClient);
+                Reservation newReservation = new Reservation(suitableRoom, myClient);
                 suitableRoom.Reservations.Add(newReservation);
                 myClient.Reservations.Add(newReservation);
                 Reservations.Add(newReservation);
@@ -85,4 +85,5 @@
             }
 
         }
+    }
 }
