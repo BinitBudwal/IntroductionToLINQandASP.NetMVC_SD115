@@ -6,7 +6,7 @@
         public int Capacity { get; set; }
         public bool Occupied { get; set; } = false;
         public string Rating { get; set; }
-        public int Occupants { get; set; }
+        public int CurrentOccupants { get; set; } = 0;
         public List<Reservation> Reservations { get; set; }
         public Reservation Reservation { get; set; }
         public Room(string number, int capacity, string rating)

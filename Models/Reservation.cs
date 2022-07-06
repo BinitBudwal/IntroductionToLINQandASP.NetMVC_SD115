@@ -3,9 +3,10 @@
     public class Reservation
     {
         public int IdCounter { get; set; } = 1;
-        public DateTime Date { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime StartDate { get; set; }
         public int Occupants { get; set; }
-        public bool IsCurrent { get; set; } = false;
+        public bool Current { get; set; } = false;
         public Client Client { get; set; }
         public List<Client> Clients { get; set; }
         public Room Room { get; set; }
@@ -15,6 +16,8 @@
             Room = room;
             Client = client;
             IdCounter++;
+            Created = DateTime.Now;
+            StartDate = DateTime.Today.AddDays(1);
 
         }
     }

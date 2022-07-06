@@ -22,8 +22,8 @@
             Rooms.Add(room1);
             Rooms.Add(room2);
             Rooms.Add(room3);
-            Client client1 = new Client("Honey", 9898656545458787,"Regular");
-            Client client2 = new Client("Bunny", 9898232245696161,"Regular");
+            Client client1 = new Client("Honey", 9898656545458787, "Regular");
+            Client client2 = new Client("Bunny", 9898232245696161, "Regular");
             Client client3 = new Client("Money", 8084333312984577, "Premium");
 
             Clients.Add(client1);
@@ -85,4 +85,46 @@
             }
 
         }
+        public static void Checkin(string clientName)
+        {
+            Reservation updateReservation = Reservations.First(r => r.Client.Name.Equals(clientName));
+            updateReservation.Current = true;
+        }
+
+        public static void Checkout(int roomNum)
+        {
+            Reservation updateReservation = Reservations.First(r => r.Room.RoomNum.Equals(roomNum));
+            updateReservation.Current = false;
+        }
+
+        public static void Checkout(string clientName)
+        {
+            Reservation updateReservation = Reservations.First(r => r.Client.Name.Equals(clientName));
+            updateReservation.Current = false;
+        }
+
+        public static int TotalCapacityRemaining()
+        {
+            int totalCapacity = Rooms.Sum(r => r.Capacity);
+            int occupants = Reservations.Sum(r => r.Occupants);
+            int capacityRemaining = totalCapacity - occupants;
+            return capacityRemaining;
+        }
+
+        public static int AverageOccupancyPercentage()
+        {
+            List<Reservation> currentReservation = Reservations.Where(r => r.IsCurrent.Equals(true)).ToList();
+            int totalOccupants = currentReservation.Sum(r => r.Occupants);
+            int totalCapacity = currentReservation.Sum(r => r.Room.Capacity);
+            int average = (totalOccupants / totalCapacity) * 100;
+            return average;
+        }
+
+        public static List<Reservation> FutureBooking()
+        {
+            DateTime todaysDate = new DateTime();
+            List<Reservation> futureBooking = Reservations.Where(r => r.StartDate > todaysDate).ToList();
+            return futureBooking;
+        }
+    }
 }

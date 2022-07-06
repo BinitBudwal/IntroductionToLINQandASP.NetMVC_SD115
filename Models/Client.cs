@@ -8,6 +8,7 @@
         public long CreditCard { get; set; }
         public string Membership { get; set; }
         public List<Reservation> Reservations { get; set; }
+        public Reservation Reservation { get; set; }
         public Client(string name, long creditCard, string membership)
         {
             Name = name;
